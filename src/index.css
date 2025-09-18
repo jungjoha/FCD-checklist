@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* Optional: globale Basis-Styles */
+@layer base {
+  html { @apply font-sans text-slate-900 bg-slate-50; }
+  body { @apply antialiased; }
+}
