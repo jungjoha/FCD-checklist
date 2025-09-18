@@ -1,100 +1,114 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+
 
 // FCD Diagnostic Orientation Aid – Interactive Checklist
 const ITEMS = [
-  {
-    id: 1,
-    label:
-      "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
+  { id: 1,
+    label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
     instruction:
       "Subjektiv berichtete ausgeprägte kognitive Schwierigkeiten und/oder niedrige standardisierte kognitive Testergebnisse stehen im Gegensatz zu Beispielen wie: Fähigkeit, eine kognitiv anspruchsvolle Arbeit ohne Schwierigkeiten auszuüben, im Gespräch beobachtete kommunikative Fähigkeiten oder die Fähigkeit, Tätigkeiten wie Lesen, Finanzverwaltung und Autofahren ohne Probleme auszuführen.",
   },
-  {
-    id: 2,
-    label:
-      "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
+  { id: 2,
+    label: "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
     onlyFull: false,
     instruction:
-      "Während des Gesprächs nennt der Patient spezifische Beispiele für Gedächtnisausfälle mit detaillierten, über die erfragten Informationen hinausgehenden Angaben. Im Gegensatz zu Patienten mit Neurodegeneration können Patienten mit FCD oft längere Zeit ununterbrochen berichten.",
+      "Während des Gesprächs nennt der Patient spezifische Beispiele für Gedächtnisausfälle mit detaillierten, über die erfragten Informationen hinausgehenden Angaben. Im Gegensatz zu Patienten mit Neurodegeneration können Patienten mit Funktioneller Kognitiver Störung oft längere Zeit ununterbrochen berichten.",
   },
-  {
-    id: 3,
-    label:
-      "Sind die kognitiven Symptome ablenkbar und/oder fluktuierend (z. B. variabel in unterschiedlichen Situationen)?",
+  { id: 3,
+    label: "Sind die kognitiven Symptome ablenkbar und/oder fluktuierend (z. B. variabel in unterschiedlichen Situationen)?",
     onlyFull: true,
     instruction:
-      "Schwierigkeiten treten nur in bestimmten Situationen auf: z. B. gute Aufmerksamkeit im Interview, aber unverhältnismäßige Beeinträchtigung bei Tests oder wenn die Aufmerksamkeit auf die Symptome gelenkt wird. Dies unterscheidet sich von einfacher zeitlicher Fluktuation (z. B. Delir, Lewy-Body-Demenz).",
+      "Schwierigkeiten treten nur in bestimmten Situationen auf … (Abgrenzung zu Delir/Lewy-Body-Demenz).",
   },
-  {
-    id: 4,
-    label:
-      "Kann der Patient die Liste der verordneten Medikamente nennen und/oder frühere Kontakte mit anderen Ärzten (Diagnosen/Untersuchungen) erinnern?",
+  { id: 4,
+    label: "Kann der Patient die Liste der verordneten Medikamente nennen und/oder frühere Kontakte mit anderen Ärzten (Diagnosen/Untersuchungen) erinnern?",
     onlyFull: true,
     instruction:
-      "Fähigkeit, frühere Arztkontakte samt Diagnosen/Untersuchungen wiederzugeben. Ebenso die Fähigkeit, eine Medikamentenliste samt Indikationen aus dem Gedächtnis zu nennen – Hinweis auf gutes Gedächtnis und Inkongruenz zu berichteten Symptomen.",
+      "Wiedergabe früherer Arztkontakte/Diagnosen. Medikamentenliste samt Indikationen aus dem Gedächtnis → Inkongruenz zu berichteten Symptomen.",
   },
-  {
-    id: 5,
-    label:
-      "Gibt es eine Vorgeschichte einer nicht-kognitiven funktionellen neurologischen Störung und/oder funktioneller somatischer Störungen (Schmerzen, Fatigue, Dissoziation …)?",
+  { id: 5,
+    label: "Gibt es eine Vorgeschichte einer nicht-kognitiven funktionellen neurologischen Störung und/oder funktioneller somatischer Störungen (Schmerzen, Fatigue, Dissoziation …)?",
     onlyFull: false,
     instruction:
-      "Vorhandensein anderer funktioneller Symptome oder Diagnosen kann ein hilfreicher (nicht notwendiger) Hinweis auf FCD sein.",
+      "Vorhandensein anderer funktioneller Symptome/Diagnosen kann ein hilfreicher (nicht notwendiger) Hinweis sein.",
   },
-  {
-    id: 6,
-    label:
-      "Ist der Patient sich der kognitiven Veränderungen stärker bewusst als andere (z. B. Selbstüberweisung und/oder alleinige Vorstellung)?",
+  { id: 6,
+    label: "Ist der Patient sich der kognitiven Veränderungen stärker bewusst als andere (z. B. Selbstüberweisung und/oder alleinige Vorstellung)?",
     onlyFull: false,
     instruction:
-      "Fremdanamnese zeigt oft, dass die Besorgnis des Patienten größer ist als die der Begleitperson/Angehörigen. Unterstützend: alleinige Vorstellung oder Selbstüberweisung.",
+      "Fremdanamnese: Besorgnis des Patienten größer als die der Angehörigen; alleinige Vorstellung/Selbstüberweisung.",
   },
-  {
-    id: 7,
-    label:
-      "Ist die kognitive Leistung normal oder zeigt sie ein inkonsistentes Muster (z. B. schlechter beim unmittelbaren als beim verzögerten Erinnern, besseres Rückwärts- als Vorwärts-Nachsprechen von Ziffern, ungefähre Antworten)?",
+  { id: 7,
+    label: "Ist die kognitive Leistung normal oder inkonsistent (z. B. schlechter beim unmittelbaren als verzögerten Erinnern, besser rückwärts als vorwärts, ungefähre Antworten)?",
     onlyFull: true,
     instruction:
-      "Wichtiger als normale Leistung ist Inkonsistenz – v. a. innerhalb derselben Domäne. Bessere Leistung bei automatischem als bei explizitem Abruf. Manche zeigen geringe Persistenz oder vage Antworten, die sich durch Ermutigung verbessern. Mitfaktoren (Bewusstseinsfluktuation, psychiatrischer Zustand, Kopfschmerz) berücksichtigen.",
+      "Intra-/intramodale Inkonsistenz ist wichtiger als „normal“. Besser bei automatischem Abruf; geringe Persistenz/vage Antworten können sich durch Ermutigung verbessern.",
   },
-  {
-    id: 8,
+  { id: 8,
     label: "Sind die Gedächtnissymptome im Verlauf stabil oder gebessert?",
     onlyFull: false,
     instruction:
-      "Abrupter Beginn und dann Stabilität oder lange Symptomgeschichte ohne Progression/mit Besserung. Vorsicht bei vaskulärer kognitiver Beeinträchtigung oder nach SHT – dort kann Stabilität/Besserung durch Komorbiditätsmanagement erklärbar sein.",
+      "Abrupter Beginn + Stabilität/Langzeit ohne Progression bzw. Besserung; Vorsicht bei VCI/SHT (Komorbiditäten!).",
   },
-  {
-    id: 9,
+  { id: 9,
     label: "Kann der Patient den Symptombeginn präzise datieren (abrupter Beginn)?",
     onlyFull: false,
     instruction:
-      "Manche können den Beginn genau beschreiben, teils im Zusammenhang mit Ereignissen wie Migräneattacke, Dissoziationsepisode oder leichtem Schädeltrauma.",
+      "Exakte Datierung, teils im Kontext von Migräne/Dissoziation/leichtem SHT.",
   },
-  {
-    id: 10,
+  { id: 10,
     label: "Gibt es einen offensichtlichen psychologischen Stressor?",
     onlyFull: false,
     instruction:
-      "Psychologische Stressoren können prädisponierende, auslösende oder aufrechterhaltende Faktoren sein. Bei manchen ist die Pathophysiologie mit Depression/Angst und belastenden Lebensereignissen verknüpft. Nie isoliert interpretieren, da auch bei Neurodegeneration möglich.",
+      "Stressoren können prädisponierend, auslösend oder aufrechterhaltend sein; nie isoliert interpretieren.",
   },
-  {
-    id: 11,
+  { id: 11,
     label: "Kann der Patient zusammengesetzte/mehrteilige Fragen beantworten?",
     onlyFull: true,
     instruction:
-      "Adressieren von Teilen einer zusammengesetzten Frage wurde bei FCD häufiger berichtet als bei Neurodegeneration. MCI-Patienten können dies oft ebenfalls (v. a. bei hoher Bildung); bei FCD jedoch inkongruent zu schwerer Symptomschilderung.",
+      "Teile beantworten wurde bei FCD häufiger berichtet; bei MCI auch möglich, aber oft nicht inkongruent.",
   },
 ];
 
 // -1 = nicht gesetzt, 0 = Nein/nicht getestet, 1 = Ja
 const initialSelections = Object.fromEntries(ITEMS.map((i) => [i.id, -1]));
+const STORAGE_KEY = "fcd-checklist-v1";
 
 function App() {
   const [isFull, setIsFull] = useState(false); // false = Kurzversion
   const [selections, setSelections] = useState(initialSelections);
   const [activeInfoId, setActiveInfoId] = useState(null);
+
+  // Pop-up (Impressum & Datenschutz)
+const [showLegal, setShowLegal] = useState(false);
+
+// ESC schließt das Pop-up
+useEffect(() => {
+  if (!showLegal) return;
+  const onKey = (e) => { if (e.key === "Escape") setShowLegal(false); };
+  window.addEventListener("keydown", onKey);
+  return () => window.removeEventListener("keydown", onKey);
+}, [showLegal]);
+
+  // Load persisted state
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (saved?.selections) setSelections(saved.selections);
+        if (typeof saved?.isFull === "boolean") setIsFull(saved.isFull);
+      }
+    } catch {}
+  }, []);
+
+  // Persist on change
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ selections, isFull }));
+    } catch {}
+  }, [selections, isFull]);
 
   const visibleItems = useMemo(
     () => ITEMS.filter((it) => (isFull ? true : !it.onlyFull)),
@@ -109,56 +123,95 @@ function App() {
     [selections, visibleItems]
   );
 
+  const answeredCount = useMemo(
+    () =>
+      Object.entries(selections)
+        .filter(([id, val]) => visibleItems.some((v) => v.id === Number(id)) && val !== -1)
+        .length,
+    [selections, visibleItems]
+  );
+
   const maxScore = visibleItems.length;
+  const progressPct = maxScore ? Math.round((answeredCount / maxScore) * 100) : 0;
+
+  // Cutoff/probability visualization helpers
+  const cutoff = isFull ? 6 : 4;
+  const cutoffPct = maxScore ? Math.round((cutoff / maxScore) * 100) : 0;
+  const probText = totalScore >= cutoff
+    ? "Oberhalb des Cut-offs: hohe Spezifität (~97%) und positiver Vorhersagewert ~91% für funktionelle kognitive Störung (Pilotdaten)."
+    : "Unterhalb des Cut-offs: Funktionelle kognitive Störung wenig wahrscheinlich; bitte klinische Beurteilung und Verlauf beachten.";
 
   const handleSet = (id, val) => {
     setSelections((prev) => ({ ...prev, [id]: val }));
   };
 
   const handleReset = () => {
+    const ok = window.confirm("Alle Antworten zurücksetzen?");
+    if (!ok) return;
     setSelections(initialSelections);
     setActiveInfoId(null);
   };
 
-  const activeInstruction = useMemo(() => {
-    if (activeInfoId == null) return null;
-    const it = ITEMS.find((i) => i.id === activeInfoId);
-    return it?.instruction ?? null;
-  }, [activeInfoId]);
+  const activeItem = useMemo(
+    () => (activeInfoId ? ITEMS.find((i) => i.id === activeInfoId) ?? null : null),
+    [activeInfoId]
+  );
 
   return (
-    <div className="min-h-screen font-sans antialiased bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white/70 backdrop-blur border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="text-2xl font-semibold tracking-tight">
               Funktionelle kognitive Störungen – Diagnostische Orientierungshilfe
             </h1>
-            <p className="text-sm text-slate-500 mt-0.5">
-              Kurzcheck & Vollversion mit Instruktionen
-            </p>
+            <div className="mt-2 flex items-center gap-3">
+              <span className="text-sm text-slate-600">Kurzversion</span>
+              <button
+                role="switch"
+                aria-checked={isFull}
+                onClick={() => setIsFull((v) => !v)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ring-1 ring-inset ${
+                  isFull ? "bg-blue-600 ring-blue-600" : "bg-slate-200 ring-slate-300"
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+                title="Kurz-/Vollversion umschalten"
+              >
+                <span
+                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
+                    isFull ? "translate-x-5" : "translate-x-1"
+                  }`}
+                />
+              </button>
+              <span className="text-sm text-slate-600">Vollversion</span>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              {/* Score pill */}
+              <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold border border-emerald-200">
+                {totalScore} / {maxScore} Punkte
+              </span>
+            </div>
+            {/* Probability visualization */}
+            <div className="mt-2 w-full max-w-md">
+              <div className="relative h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+                <div
+                  className={`absolute inset-y-0 left-0 transition-all ${totalScore >= cutoff ? "bg-emerald-600" : "bg-slate-400"}`}
+                  style={{ width: `${Math.max(0, Math.min(100, Math.round((totalScore / maxScore) * 100)))}%` }}
+                  aria-label={`Score-Balken ${totalScore} von ${maxScore}`}
+                />
+                <div className="absolute top-0 bottom-0" style={{ left: `${cutoffPct}%` }}>
+                  <div
+                    className="h-full w-0.5 bg-slate-600/60"
+                    title={`Cut-off ${cutoff}`}
+                    aria-label={`Cut-off ${cutoff}`}
+                    role="img"
+                  />
+                </div>
+              </div>
+              <p className="mt-1 text-xs text-slate-500">{probText}</p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-600">Kurzversion</span>
-            <button
-              role="switch"
-              aria-checked={isFull}
-              onClick={() => setIsFull((v) => !v)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ring-1 ring-inset ${
-                isFull ? "bg-blue-600 ring-blue-600" : "bg-slate-200 ring-slate-300"
-              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
-              title="Kurz-/Vollversion umschalten"
-            >
-              <span
-                className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-                  isFull ? "translate-x-5" : "translate-x-1"
-                }`}
-              />
-            </button>
-            <span className="text-sm text-slate-600">Vollversion</span>
-          </div>
         </div>
       </header>
 
@@ -171,10 +224,16 @@ function App() {
               const val = selections[it.id];
               const isYes = val === 1;
               const isNo = val === 0;
+              const isActive = activeInfoId === it.id;
+
               return (
                 <div
                   key={it.id}
-                  className="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ring-black/5"
+                  className={`rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ${
+                    isActive
+                      ? "border-blue-300 ring-blue-200 bg-white"
+                      : "border-slate-200 ring-black/5 bg-white/95"
+                  }`}
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex-1">
@@ -182,7 +241,7 @@ function App() {
                         <span className="mt-1 text-sm font-semibold text-slate-400">
                           {idx + 1}.
                         </span>
-                        <p className="text-base sm:text-lg font-medium leading-snug text-slate-900">
+                        <p className="text-base sm:text-lg font-medium leading-snug">
                           {it.label}
                           {!isFull && it.onlyFull && (
                             <span className="ml-2 text-xs font-normal text-slate-500 align-middle">
@@ -195,15 +254,13 @@ function App() {
 
                     {it.instruction && (
                       <button
-                        onClick={() =>
-                          setActiveInfoId((cur) => (cur === it.id ? null : it.id))
-                        }
+                        onClick={() => setActiveInfoId((cur) => (cur === it.id ? null : it.id))}
                         className={`rounded-xl border px-3 py-1.5 text-sm transition hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                          activeInfoId === it.id
+                          isActive
                             ? "bg-blue-50 border-blue-300 text-blue-700"
                             : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
                         }`}
-                        aria-pressed={activeInfoId === it.id}
+                        aria-pressed={isActive}
                         title="Instruktion anzeigen"
                       >
                         Instruktion
@@ -220,7 +277,7 @@ function App() {
                           : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
                       }`}
                     >
-                      Nein / nicht getestet
+                      Nein/nicht getestet
                     </button>
                     <button
                       onClick={() => handleSet(it.id, 1)}
@@ -263,17 +320,20 @@ function App() {
         {/* Instruction panel */}
         <aside className="md:col-span-1">
           <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
-            <h2 className="text-base font-semibold mb-2 text-slate-900">
-              Instruktions-Kasten
-            </h2>
-            {activeInstruction ? (
-              <p className="text-sm leading-relaxed text-slate-700">
-                {activeInstruction}
-              </p>
+            <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
+            {activeItem ? (
+              <>
+                <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                  Item {ITEMS.findIndex(i => i.id === activeItem.id) + 1}
+                </p>
+                <p className="text-sm font-medium text-slate-900 mb-2">
+                  {activeItem.label}
+                </p>
+                <p className="text-sm leading-relaxed text-slate-700">{activeItem.instruction}</p>
+              </>
             ) : (
               <p className="text-sm text-slate-500">
-                Klicken Sie bei einem Item auf{" "}
-                <span className="font-medium">„Instruktion“</span>, um die
+                Klicken Sie bei einem Item auf <span className="font-medium">„Instruktion“</span>, um die
                 Bewertungsanleitung hier anzuzeigen.
               </p>
             )}
@@ -283,21 +343,102 @@ function App() {
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white/80 backdrop-blur">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-sm text-slate-600">
-            Version:{" "}
-            {isFull
-              ? "Vollversion (alle 11 Items)"
-              : `Kurzversion (${ITEMS.filter((i) => !i.onlyFull).length} Items)`}
+        <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-4 text-xs text-slate-600 sm:text-[13px]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          
           </div>
-          <div className="inline-flex items-center gap-2">
-            <span className="text-sm text-slate-500">Gesamtpunktzahl</span>
-            <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold border border-emerald-200">
-              {totalScore} / {maxScore}
-            </span>
+
+          {/* Hinweise */}
+          <div className="leading-relaxed">
+            <p>
+              Diese Checkliste basiert auf Cabreira&nbsp;et&nbsp;al., <em>BMJ Neurology Open</em> (2025).{" "}
+              <a
+                href="https://doi.org/10.1136/bmjno-2024-000918"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-slate-400 hover:decoration-slate-600"
+              >
+                https://doi.org/10.1136/bmjno-2024-000918
+              </a>
+            </p>
+            <p className="mt-1">
+              WebApp entwickelt von J.&nbsp;Jungilligens (Klinik für Neurologie, Knappschaft Kliniken
+              Universitätsklinikum Bochum), J.&nbsp;Beckers (Klinik für Neurologie, Knappschaft Kliniken
+              Universitätsklinikum Bochum) und S.&nbsp;Popkirov (Klinik für Neurologie, Universitätsklinikum Essen).
+            </p>
+            <p className="mt-1">
+              <strong>Datenschutz:</strong> Diese WebApp speichert, verarbeitet oder überträgt keinerlei personenbezogene Daten. 
+              Alle Eingaben verbleiben ausschließlich im Browser der Nutzerinnen und Nutzer und werden nicht an Server oder Dritte übermittelt.
+            </p>
+            <p className="mt-1">
+              <button
+                type="button"
+                onClick={() => setShowLegal(true)}
+                className="underline decoration-slate-400 hover:decoration-slate-600"
+              >
+                Impressum 
+              </button>
+              
+            </p>
           </div>
         </div>
       </footer>
+      {showLegal && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    {/* Overlay */}
+    <div
+      className="absolute inset-0 bg-black/50"
+      onClick={() => setShowLegal(false)}
+      aria-hidden="true"
+    />
+    {/* Dialog */}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="legal-title"
+      className="relative max-w-2xl w-full rounded-2xl bg-white shadow-xl ring-1 ring-black/10"
+    >
+      <div className="flex items-start justify-between px-4 py-3 border-b border-slate-200">
+        <h3 id="legal-title" className="text-base font-semibold">
+          Impressum 
+        </h3>
+        <button
+          type="button"
+          onClick={() => setShowLegal(false)}
+          className="rounded-md px-2 py-1 text-slate-600 hover:bg-slate-100"
+          aria-label="Pop-up schließen"
+        >
+          ✕
+        </button>
+      </div>
+
+            <div className="px-4 py-4 space-y-4 text-sm leading-relaxed text-slate-700">
+              <section>
+                <h4 className="font-semibold text-slate-900 mb-1">Impressum</h4>
+                <p>
+                  Verantwortlich: Dr. J. Jungilligens<br/>
+                  Klinik für Neurologie, Knappschaft Kliniken Universitätsklinikum Bochum<br/>
+                  In der Schornau 23–25, 44892 Bochum
+                </p>
+                <p className="mt-2 text-slate-600">
+                  Hinweis: Diese WebApp ist <strong>kein offizielles Projekt</strong> der Klinik.
+                </p>
+              </section>
+
+            </div>
+
+            <div className="px-4 py-3 border-t border-slate-200 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowLegal(false)}
+                className="rounded-lg border px-3 py-1.5 text-sm bg-white hover:bg-slate-50 border-slate-300"
+              >
+                Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
