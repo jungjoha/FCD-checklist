@@ -237,11 +237,11 @@ useEffect(() => {
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex-1">
-                      <div className="flex items-start gap-2 flex-wrap">
-                        <span className="mt-1 text-sm font-semibold text-slate-400">
+                      <div className="flex items-start gap-2">
+                        <span className="mt-1 text-sm font-semibold text-slate-400 flex-none">
                           {idx + 1}.
                         </span>
-                        <p className="text-base sm:text-lg font-medium leading-snug">
+                        <p className="text-base sm:text-lg font-medium leading-snug flex-1 min-w-0">
                           {it.label}
                           {!isFull && it.onlyFull && (
                             <span className="ml-2 text-xs font-normal text-slate-500 align-middle">
@@ -290,6 +290,13 @@ useEffect(() => {
                       Ja
                     </button>
                   </div>
+                  {/* Inline instruction on small screens */}
+                  {it.instruction && isActive && (
+                    <div className="mt-3 md:hidden rounded-xl border border-slate-200 bg-slate-50 p-3">
+                      <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">Instruktion</p>
+                      <p className="text-sm leading-relaxed text-slate-700">{it.instruction}</p>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -318,7 +325,7 @@ useEffect(() => {
         </section>
 
         {/* Instruction panel */}
-        <aside className="md:col-span-1">
+        <aside className="hidden md:block md:col-span-1">
           <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
             <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
             {activeItem ? (
@@ -369,6 +376,14 @@ useEffect(() => {
             <p className="mt-1">
               <strong>Datenschutz:</strong> Diese WebApp speichert, verarbeitet oder überträgt keinerlei personenbezogene Daten. 
               Alle Eingaben verbleiben ausschließlich im Browser der Nutzerinnen und Nutzer und werden nicht an Server oder Dritte übermittelt.
+            </p>
+            <p className="mt-1">
+              <strong>Haftungsausschluss:</strong> Diese WebApp richtet sich ausschließlich an Angehörige der Gesundheitsberufe und dient als ergänzende Orientierungshilfe. 
+              Sie ersetzt <em>keine</em> ärztliche Anamnese, Untersuchung, Diagnostik oder Therapieentscheidung. 
+              Die hier dargestellten Cut-offs und Wahrscheinlichkeiten beruhen auf Pilotdaten (Cabreira&nbsp;et&nbsp;al., 2025) und bedürfen prospektiver Validierung; 
+              eine Gewähr für Vollständigkeit, Richtigkeit und Aktualität wird nicht übernommen. 
+              Die Verantwortung für die Beurteilung des Einzelfalls liegt bei der behandelnden Ärztin/dem behandelnden Arzt. 
+              Eine Haftung der Autorinnen/Autoren und Betreiber für Schäden, die aus der Nutzung oder dem Vertrauen auf die bereitgestellten Informationen entstehen, ist – außer bei Vorsatz und grober Fahrlässigkeit – ausgeschlossen.
             </p>
             <p className="mt-1">
               <button
