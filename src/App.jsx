@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 // FCD Diagnostic Orientation Aid – Interactive Checklist
 const ITEMS = [
   { id: 1,
-    label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
+    label: "Test",
     onlyFull: false,
     instruction:
       "Subjektiv berichtete ausgeprägte kognitive Schwierigkeiten und/oder niedrige standardisierte kognitive Testergebnisse stehen im Gegensatz zu Beispielen wie: Fähigkeit, eine kognitiv anspruchsvolle Arbeit ohne Schwierigkeiten auszuüben, im Gespräch beobachtete kommunikative Fähigkeiten oder die Fähigkeit, Tätigkeiten wie Lesen, Finanzverwaltung und Autofahren ohne Probleme auszuführen.",
