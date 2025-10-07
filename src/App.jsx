@@ -4,10 +4,13 @@ import React, { useEffect, useMemo, useState } from "react";
 // FCD Diagnostic Orientation Aid – Interactive Checklist
 const ITEMS = [
   { id: 1,
-    label: "Test",
+    label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
     instruction:
-      "Subjektiv berichtete ausgeprägte kognitive Schwierigkeiten und/oder niedrige standardisierte kognitive Testergebnisse stehen im Gegensatz zu Beispielen wie: Fähigkeit, eine kognitiv anspruchsvolle Arbeit ohne Schwierigkeiten auszuüben, im Gespräch beobachtete kommunikative Fähigkeiten oder die Fähigkeit, Tätigkeiten wie Lesen, Finanzverwaltung und Autofahren ohne Probleme auszuführen.",
+      "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:\n" +
+      "• der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben\n" +
+      "• im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten\n" +
+      "• der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen.",
   },
   { id: 2,
     label: "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
