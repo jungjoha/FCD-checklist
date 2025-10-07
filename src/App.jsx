@@ -7,9 +7,7 @@ const ITEMS = [
     label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
     instruction:
-  "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:\n- der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben\n" +
-  "- im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten\n" +
-  "- der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen."
+      "Subjektiv berichtete ausgeprägte kognitive Schwierigkeiten und/oder niedrige standardisierte kognitive Testergebnisse stehen im Gegensatz zu Beispielen wie: - Fähigkeit, eine kognitiv anspruchsvolle Arbeit ohne Schwierigkeiten auszuüben, - im Gespräch beobachtete kommunikative Fähigkeiten oder - die Fähigkeit, Tätigkeiten wie Lesen, Finanzverwaltung und Autofahren ohne Probleme auszuführen.",
   },
   { id: 2,
     label: "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
@@ -72,6 +70,26 @@ const ITEMS = [
       "Teile beantworten wurde bei FCD häufiger berichtet; bei MCI auch möglich, aber oft nicht inkongruent.",
   },
 ];
+
+function InstructionText({ text }) {
+  if (!text) return null;
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  const isList = lines.some((l) => /^[-•]/.test(l));
+  if (isList) {
+    return (
+      <ul className="list-disc pl-5 space-y-1 text-sm leading-relaxed text-slate-700">
+        {lines.map((l, i) => (
+          <li key={i}>{l.replace(/^[-•]\s*/, "")}</li>
+        ))}
+      </ul>
+    );
+  }
+  return (
+    <p className="text-sm leading-relaxed whitespace-pre-line text-slate-700">
+      {text}
+    </p>
+  );
+}
 
 // -1 = nicht gesetzt, 0 = Nein/nicht getestet, 1 = Ja
 const initialSelections = Object.fromEntries(ITEMS.map((i) => [i.id, -1]));
@@ -220,8 +238,8 @@ useEffect(() => {
       {/* Content */}
       <main className="max-w-5xl mx-auto px-4 py-8 sm:py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Items */}
-        <section className="md:col-span-2">
-          <div className="space-y-4">
+        <section className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="space-y-4 col-span-full">
             {visibleItems.map((it, idx) => {
               const val = selections[it.id];
               const isYes = val === 1;
@@ -229,77 +247,95 @@ useEffect(() => {
               const isActive = activeInfoId === it.id;
 
               return (
-                <div
-                  key={it.id}
-                  className={`rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ${
-                    isActive
-                      ? "border-blue-300 ring-blue-200 bg-white"
-                      : "border-slate-200 ring-black/5 bg-white/95"
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-start gap-2">
-                        <span className="mt-1 text-sm font-semibold text-slate-400 flex-none">
-                          {idx + 1}.
-                        </span>
-                        <p className="text-base sm:text-lg font-medium leading-snug flex-1 min-w-0">
-                          {it.label}
-                          {!isFull && it.onlyFull && (
-                            <span className="ml-2 text-xs font-normal text-slate-500 align-middle">
-                              (nur Vollversion)
-                            </span>
-                          )}
-                        </p>
+                <React.Fragment key={it.id}>
+                  {/* Item card (left, spans 2 columns on md+) */}
+                  <div
+                    className={`md:col-span-2 rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ${
+                      isActive
+                        ? "border-blue-300 ring-blue-200 bg-white"
+                        : "border-slate-200 ring-black/5 bg-white/95"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-start gap-2">
+                          <span className="mt-1 text-sm font-semibold text-slate-400 flex-none">
+                            {idx + 1}.
+                          </span>
+                          <p className="text-base sm:text-lg font-medium leading-snug flex-1 min-w-0">
+                            {it.label}
+                            {!isFull && it.onlyFull && (
+                              <span className="ml-2 text-xs font-normal text-slate-500 align-middle">
+                                (nur Vollversion)
+                              </span>
+                            )}
+                          </p>
+                        </div>
                       </div>
+
+                      {it.instruction && (
+                        <button
+                          onClick={() => setActiveInfoId((cur) => (cur === it.id ? null : it.id))}
+                          className={`rounded-xl border px-3 py-1.5 text-sm transition hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                            isActive
+                              ? "bg-blue-50 border-blue-300 text-blue-700"
+                              : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+                          }`}
+                          aria-pressed={isActive}
+                          title="Instruktion anzeigen"
+                        >
+                          Instruktion
+                        </button>
+                      )}
                     </div>
 
-                    {it.instruction && (
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <button
-                        onClick={() => setActiveInfoId((cur) => (cur === it.id ? null : it.id))}
-                        className={`rounded-xl border px-3 py-1.5 text-sm transition hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                          isActive
-                            ? "bg-blue-50 border-blue-300 text-blue-700"
-                            : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+                        onClick={() => handleSet(it.id, 0)}
+                        className={`rounded-xl px-3 py-2 text-sm font-medium border transition focus:outline-none focus:ring-2 focus:ring-slate-400 ${
+                          isNo
+                            ? "bg-slate-900 text-white border-slate-900"
+                            : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
                         }`}
-                        aria-pressed={isActive}
-                        title="Instruktion anzeigen"
                       >
-                        Instruktion
+                        Nein/nicht getestet
                       </button>
+                      <button
+                        onClick={() => handleSet(it.id, 1)}
+                        className={`rounded-xl px-3 py-2 text-sm font-medium border transition focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
+                          isYes
+                            ? "bg-emerald-600 text-white border-emerald-600"
+                            : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                        }`}
+                      >
+                        Ja
+                      </button>
+                    </div>
+                    {/* Inline instruction on small screens */}
+                    {it.instruction && isActive && (
+                      <div className="mt-3 md:hidden rounded-xl border border-slate-200 bg-slate-50 p-3">
+                        <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">Instruktion</p>
+                        <InstructionText text={it.instruction} />
+                      </div>
                     )}
                   </div>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <button
-                      onClick={() => handleSet(it.id, 0)}
-                      className={`rounded-xl px-3 py-2 text-sm font-medium border transition focus:outline-none focus:ring-2 focus:ring-slate-400 ${
-                        isNo
-                          ? "bg-slate-900 text-white border-slate-900"
-                          : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
-                      }`}
-                    >
-                      Nein/nicht getestet
-                    </button>
-                    <button
-                      onClick={() => handleSet(it.id, 1)}
-                      className={`rounded-xl px-3 py-2 text-sm font-medium border transition focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
-                        isYes
-                          ? "bg-emerald-600 text-white border-emerald-600"
-                          : "bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
-                      }`}
-                    >
-                      Ja
-                    </button>
-                  </div>
-                  {/* Inline instruction on small screens */}
+                  {/* Desktop instruction panel placed next to this item only when active */}
                   {it.instruction && isActive && (
-                    <div className="mt-3 md:hidden rounded-xl border border-slate-200 bg-slate-50 p-3">
-                      <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">Instruktion</p>
-                      <p className="text-sm leading-relaxed text-slate-700">{it.instruction}</p>
+                    <div className="hidden md:block md:col-span-1">
+                      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
+                        <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
+                        <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                          Item {ITEMS.findIndex(i => i.id === it.id) + 1}
+                        </p>
+                        <p className="text-sm font-medium text-slate-900 mb-2">
+                          {it.label}
+                        </p>
+                        <InstructionText text={it.instruction} />
+                      </div>
                     </div>
                   )}
-                </div>
+                </React.Fragment>
               );
             })}
 
@@ -325,29 +361,6 @@ useEffect(() => {
             </div>
           </div>
         </section>
-
-        {/* Instruction panel */}
-        <aside className="hidden md:block md:col-span-1">
-          <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
-            <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
-            {activeItem ? (
-              <>
-                <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                  Item {ITEMS.findIndex(i => i.id === activeItem.id) + 1}
-                </p>
-                <p className="text-sm font-medium text-slate-900 mb-2">
-                  {activeItem.label}
-                </p>
-                <p className="text-sm leading-relaxed text-slate-700">{activeItem.instruction}</p>
-              </>
-            ) : (
-              <p className="text-sm text-slate-500">
-                Klicken Sie bei einem Item auf <span className="font-medium">„Instruktion“</span>, um die
-                Bewertungsanleitung hier anzuzeigen.
-              </p>
-            )}
-          </div>
-        </aside>
       </main>
 
       {/* Footer */}
