@@ -100,6 +100,27 @@ function App() {
   const [selections, setSelections] = useState(initialSelections);
   const [activeInfoId, setActiveInfoId] = useState(null);
 
+  // Desktop inline instruction positioning (absolute panel)
+  const listContainerRef = React.useRef(null);
+  const itemRefs = React.useRef({});
+  const [panelTop, setPanelTop] = useState(0);
+
+  // Recompute panel top when active item changes or on resize
+  useEffect(() => {
+    const updateTop = () => {
+      if (!activeInfoId) return;
+      const el = itemRefs.current[activeInfoId];
+      const container = listContainerRef.current;
+      if (el && container) {
+        const elTop = el.offsetTop; // relative to container
+        setPanelTop(elTop);
+      }
+    };
+    updateTop();
+    window.addEventListener('resize', updateTop);
+    return () => window.removeEventListener('resize', updateTop);
+  }, [activeInfoId]);
+
   // Pop-up (Impressum & Datenschutz)
 const [showLegal, setShowLegal] = useState(false);
 
@@ -238,19 +259,18 @@ useEffect(() => {
       {/* Content */}
       <main className="max-w-5xl mx-auto px-4 py-8 sm:py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Items */}
-        <section className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="space-y-4 col-span-full">
-            {visibleItems.map((it, idx) => {
+        <section ref={listContainerRef} className="relative md:col-span-3 space-y-6 md:pr-[380px]">
+          {visibleItems.map((it, idx) => {
               const val = selections[it.id];
               const isYes = val === 1;
               const isNo = val === 0;
               const isActive = activeInfoId === it.id;
 
               return (
-                <React.Fragment key={it.id}>
-                  {/* Item card (left, spans 2 columns on md+) */}
+                <div key={it.id} ref={(el) => (itemRefs.current[it.id] = el)}>
+                  {/* Item card (left, stable width on desktop) */}
                   <div
-                    className={`md:col-span-2 rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ${
+                    className={`md:flex-grow md:basis-0 min-w-0 rounded-2xl border p-5 shadow-sm hover:shadow-md transition-shadow ring-1 ${
                       isActive
                         ? "border-blue-300 ring-blue-200 bg-white"
                         : "border-slate-200 ring-black/5 bg-white/95"
@@ -311,6 +331,7 @@ useEffect(() => {
                         Ja
                       </button>
                     </div>
+
                     {/* Inline instruction on small screens */}
                     {it.instruction && isActive && (
                       <div className="mt-3 md:hidden rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -319,45 +340,47 @@ useEffect(() => {
                       </div>
                     )}
                   </div>
-
-                  {/* Desktop instruction panel placed next to this item only when active */}
-                  {it.instruction && isActive && (
-                    <div className="hidden md:block md:col-span-1">
-                      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
-                        <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
-                        <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
-                          Item {ITEMS.findIndex(i => i.id === it.id) + 1}
-                        </p>
-                        <p className="text-sm font-medium text-slate-900 mb-2">
-                          {it.label}
-                        </p>
-                        <InstructionText text={it.instruction} />
-                      </div>
-                    </div>
-                  )}
-                </React.Fragment>
+                </div>
               );
             })}
 
-            {/* Controls below list */}
-            <div className="flex items-center justify-between mt-2">
-              <button
-                onClick={handleReset}
-                className="rounded-xl px-4 py-2 text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400"
-              >
-                Zurücksetzen
-              </button>
-              <div className="text-sm text-slate-600">
-                <span className="inline-block mr-3">Legende:</span>
-                <span className="inline-flex items-center mr-3">
-                  <span className="h-2 w-2 rounded-full bg-emerald-600 mr-1.5"></span>
-                  Ja = 1 Punkt
-                </span>
-                <span className="inline-flex items-center">
-                  <span className="h-2 w-2 rounded-full bg-slate-400 mr-1.5"></span>
-                  Nein/nicht getestet = 0 Punkte
-                </span>
+          {/* Absolute desktop instruction panel aligned to active item */}
+          {activeItem && (
+            <div
+              className="hidden md:block absolute right-0 w-[360px]"
+              style={{ top: panelTop }}
+            >
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ring-1 ring-black/5">
+                <h2 className="text-base font-semibold mb-2">Instruktionen</h2>
+                <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">
+                  Item {ITEMS.findIndex(i => i.id === activeItem.id) + 1}
+                </p>
+                <p className="text-sm font-medium text-slate-900 mb-2">
+                  {activeItem.label}
+                </p>
+                <InstructionText text={activeItem.instruction} />
               </div>
+            </div>
+          )}
+
+          {/* Controls below list */}
+          <div className="flex items-center justify-between mt-2">
+            <button
+              onClick={handleReset}
+              className="rounded-xl px-4 py-2 text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400"
+            >
+              Zurücksetzen
+            </button>
+            <div className="text-sm text-slate-600">
+              <span className="inline-block mr-3">Legende:</span>
+              <span className="inline-flex items-center mr-3">
+                <span className="h-2 w-2 rounded-full bg-emerald-600 mr-1.5"></span>
+                Ja = 1 Punkt
+              </span>
+              <span className="inline-flex items-center">
+                <span className="h-2 w-2 rounded-full bg-slate-400 mr-1.5"></span>
+                Nein/nicht getestet = 0 Punkte
+              </span>
             </div>
           </div>
         </section>
