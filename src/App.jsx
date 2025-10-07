@@ -7,10 +7,10 @@ const ITEMS = [
     label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
     instruction:
-      "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:<br>" +
-      "• der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben<br />" +
-      "• im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten<br>" +
-      "• der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen."
+  "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:\n\n" +
+  "- der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben\n" +
+  "- im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten\n" +
+  "- der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen."
   },
   { id: 2,
     label: "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
