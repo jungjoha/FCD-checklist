@@ -8,7 +8,7 @@ const ITEMS = [
     onlyFull: false,
     instruction:
       "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:<br>" +
-      "• der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben<br>" +
+      "• der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben<br />" +
       "• im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten<br>" +
       "• der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen."
   },
