@@ -7,67 +7,73 @@ const ITEMS = [
     label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
     instruction:
-      "Subjektiv berichtete ausgeprägte kognitive Schwierigkeiten und/oder niedrige standardisierte kognitive Testergebnisse stehen im Gegensatz zu Beispielen wie: - Fähigkeit, eine kognitiv anspruchsvolle Arbeit ohne Schwierigkeiten auszuüben, - im Gespräch beobachtete kommunikative Fähigkeiten oder - die Fähigkeit, Tätigkeiten wie Lesen, Finanzverwaltung und Autofahren ohne Probleme auszuführen.",
+      "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:
+•	der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben
+•	im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten 
+•	der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen.
+",
   },
   { id: 2,
-    label: "Kann der Patient konkrete Beispiele für Gedächtnisbeschwerden nennen?",
+    label: "Kann die Patientin oder der Patient detaillierte Beispiele für seine/ihre Gedächtnisbeschwerden nennen?",
     onlyFull: false,
     instruction:
-      "Während des Gesprächs nennt der Patient spezifische Beispiele für Gedächtnisausfälle mit detaillierten, über die erfragten Informationen hinausgehenden Angaben. Im Gegensatz zu Patienten mit Neurodegeneration können Patienten mit Funktioneller Kognitiver Störung oft längere Zeit ununterbrochen berichten.",
+      "Während des Gesprächs nennt die Patientin oder der Patient konkrete Beispiele für Gedächtnisausfälle, oft mit detaillierten und über die erfragten Informationen hinausgehenden Angaben. Die berichteten Symptome liegen häufig im Bereich normaler menschlicher Erfahrungen. Im Gegensatz zu neurodegenerativen Erkrankungen können Betroffene mit einer funktionellen kognitiven Störung oft längere Zeit ununterbrochen berichten.",
   },
   { id: 3,
-    label: "Sind die kognitiven Symptome ablenkbar und/oder fluktuierend (z. B. variabel in unterschiedlichen Situationen)?",
+    label: "Sind die kognitiven Beschwerden ablenkbar und/oder fluktuierend (z.B. variabel in unterschiedlichen Situationen)?",
     onlyFull: true,
     instruction:
-      "Schwierigkeiten treten nur in bestimmten Situationen auf … (Abgrenzung zu Delir/Lewy-Body-Demenz).",
+      "Bei Patientinnen oder Patienten mit funktioneller kognitiver Störung treten Schwierigkeiten häufig nur in bestimmten Situationen auf. Zum Beispiel können sie detailliert über Episoden von Gedächtnisverlust berichten und ihre Aufmerksamkeit während des Interviews aufrechterhalten, zeigen jedoch unverhältnismäßige Beeinträchtigungen derselben Funktionen in anderen Situationen (z. B. bei kognitiven Tests oder wenn die Aufmerksamkeit auf die Symptome gelenkt wird). Dies ist nicht dasselbe wie Fluktuationen im Zeitverlauf, die bei vielen anderen Erkrankungsprozessen beobachtet werden können (z. B. bei Delir oder Lewy-Körper-Demenz).
+",
   },
   { id: 4,
-    label: "Kann der Patient die Liste der verordneten Medikamente nennen und/oder frühere Kontakte mit anderen Ärzten (Diagnosen/Untersuchungen) erinnern?",
+    label: "Kann die Patientin oder der Patient die Liste der verordneten Medikamente nennen und/oder frühere Interaktionen mit anderen Ärzten erinnern (z.B. frühere Diagnosen und Untersuchungen)?",
     onlyFull: true,
     instruction:
-      "Wiedergabe früherer Arztkontakte/Diagnosen. Medikamentenliste samt Indikationen aus dem Gedächtnis → Inkongruenz zu berichteten Symptomen.",
+      "Patientinnen und Patienten mit funktioneller kognitiver Störung sind häufig in der Lage, sich an frühere Interaktionen mit anderen Ärztinnen und Ärzten zu erinnern, einschließlich spezifischer Aspekte früherer Diagnosen und Untersuchungen. Ebenso deutet die Fähigkeit, eine Liste von Medikamenten aus dem Gedächtnis wiederzugeben und deren Indikationen zu benennen, auf ein gut funktionierendes Gedächtnis hin - was oftmals im Widerspruch zu den angegebenen Symptomen steht.",
   },
   { id: 5,
-    label: "Gibt es eine Vorgeschichte einer nicht-kognitiven funktionellen neurologischen Störung und/oder funktioneller somatischer Störungen (Schmerzen, Fatigue, Dissoziation …)?",
+    label: "Gibt es eine Vorgeschichte einer nicht-kognitiven funktionellen neurologischen Störung und/oder funktionellen somatischen Störung (Schmerzen, Fatigue, …)?",
     onlyFull: false,
     instruction:
-      "Vorhandensein anderer funktioneller Symptome/Diagnosen kann ein hilfreicher (nicht notwendiger) Hinweis sein.",
+      "Das Vorliegen anderer Symptome wie chronische Schmerzen, Fatigue, Dissoziation oder das Vorliegen anderer funktioneller Diagnosen kann ein hilfreicher (aber nicht notwendiger) Hinweis auf eine funktionelle kognitive Störung sein.",
   },
   { id: 6,
-    label: "Ist der Patient sich der kognitiven Veränderungen stärker bewusst als andere (z. B. Selbstüberweisung und/oder alleinige Vorstellung)?",
+    label: "Fallen dem Betroffenen die kognitiven Veränderung stärker auf als anderen (beachten Sie dafür auch z.B. selbst initiierte Überweisung und/oder alleinige Vorstellung)?",
     onlyFull: false,
     instruction:
-      "Fremdanamnese: Besorgnis des Patienten größer als die der Angehörigen; alleinige Vorstellung/Selbstüberweisung.",
+      "Bei der funktionellen kognitiven Störung deutet die Fremdanamnese oft darauf hin, dass die Sorge von Betroffenen deutlich größer ist als die der Angehörigen. Unterstützende Hinweise zeigen sich darin, dass Patientinnen oder Patienten die Klinik allein aufsuchen und/oder die Überweisung selbst initiierte haben (d. h. Betroffene haben aufgrund ihrer Bedenken selbst die Initiative ergriffen, einen Arzt aufzusuchen).",
   },
   { id: 7,
-    label: "Ist die kognitive Leistung normal oder inkonsistent (z. B. schlechter beim unmittelbaren als verzögerten Erinnern, besser rückwärts als vorwärts, ungefähre Antworten)?",
+    label: "Ist die kognitive Leistung normal oder zeigt sie ein inkonsistentes Muster (z.B. schlechteres Ergebnis beim unmittelbaren Erinnern als beim verzögerten Abruf, bessere Leistung beim Rückwärtswiederholen von Ziffern als beim Vorwärtswiederholen, ungefähre Antworten)?",
     onlyFull: true,
     instruction:
-      "Intra-/intramodale Inkonsistenz ist wichtiger als „normal“. Besser bei automatischem Abruf; geringe Persistenz/vage Antworten können sich durch Ermutigung verbessern.",
+      "Betroffene mit funktioneller kognitiver Störung können eine normale kognitive Leistung zeigen, im Vergleich zu neurodegenerativen Erkrankungen besser abschneiden oder auch unterdurchschnittliche Ergebnisse aufweisen. Wichtiger als eine „normale“ kognitive Leistung ist jedoch das Auftreten inkonsistenter Leistungsmuster, insbesondere im selben kognitiven Funktionsbereich (z. B. schlechtere Leistung bei der unmittelbaren Erinnerung im Vergleich zur verzögerten Erinnerung, bessere Leistung beim Rückwärtswiederholen von Ziffern im Vergleich zum Vorwärtswiederholen). Dies deutet darauf hin, dass kognitive Prozesse besser funktionieren, wenn sie automatisch abgerufen werden, als wenn sie explizit gefordert sind. Einige Betroffene zeigen möglicherweise auch eine geringe Ausdauer bei Aufgaben oder geben vage Antworten, die sich mit Ermutigung verbessern. Andere beeinflussende Faktoren, wie z.B. Schwankungen im Bewusstseinszustand, starke Kopfschmerzen oder andere akute neurologische oder psychiatrische Einflussfaktoren sollten ebenfalls berücksichtigt werden, da sie Aufmerksamkeitsdefizite erklären können.
+",
   },
   { id: 8,
-    label: "Sind die Gedächtnissymptome im Verlauf stabil oder gebessert?",
+    label: "Sind die Gedächtnissymptome im Verlauf stabil oder haben sich gebessert?",
     onlyFull: false,
     instruction:
-      "Abrupter Beginn + Stabilität/Langzeit ohne Progression bzw. Besserung; Vorsicht bei VCI/SHT (Komorbiditäten!).",
+      "Patientinnen und Patienten mit funktioneller kognitiver Störung können plötzlich und schwerwiegend auftretende Symptome präsentieren, die über die Zeit stabil bleiben. In anderen Fällen haben Betroffene, die sich wegen Gedächtnisproblemen vorstellen, eine lange Dauer der Symptome, die sich über die Zeit nicht verschlechtert oder aber verbessert haben. Es ist zu beachten, dass auch bei vaskulärer kognitiver Beeinträchtigung oder nach einem Schädel-Hirn-Trauma (SHT) stabile Symptome oder eine Verbesserung im Laufe der Zeit vorliegen kann, insbesondere bei der Behandlung von Begleiterkrankungen.",
   },
   { id: 9,
-    label: "Kann der Patient den Symptombeginn präzise datieren (abrupter Beginn)?",
+    label: "Kann die Patientin oder der Patien den Beginn der Symptome präzise datieren (abrupter Beginn)?",
     onlyFull: false,
     instruction:
-      "Exakte Datierung, teils im Kontext von Migräne/Dissoziation/leichtem SHT.",
+      "Einige Patientinnen und Patienten können den Beginn der Symptome präzise beschreiben und datieren. Dabei werden häufig Zusammenhänge zu vorangegangenen spezifischen Ereignissen geschildert, beispielsweise eine Migräneattacke, ein Dissoziationserleben, ein leichtes Schädel-Hirn-Trauma oder eine Virus-Infektion. Diese Information sollte von Betroffenen selbst und nicht von den Angehörigen hervorgebracht werden.",
   },
   { id: 10,
-    label: "Gibt es einen offensichtlichen psychologischen Stressor?",
+    label: "Psychologische Stressfaktoren können als prädisponierende, auslösende oder aufrechterhaltende Faktoren bei einer funktionellen kognitiven Störung wirken. Bei einem Teil der Betroffenen ist die funktionelle kognitive Störung mit depressiven Symptomen, Angstzuständen und anderen stressbezogenen Lebensereignissen verbunden. Bei einigen Betroffenen können Gedächtnissymptome mit bedeutenden Lebensereignissen wie einem kürzlichen Trauerfall oder einer körperlichen Erkrankung in Verbindung stehen. ",
     onlyFull: false,
     instruction:
       "Stressoren können prädisponierend, auslösend oder aufrechterhaltend sein; nie isoliert interpretieren.",
   },
   { id: 11,
-    label: "Kann der Patient zusammengesetzte/mehrteilige Fragen beantworten?",
+    label: "Kann die Patientin oder der Patient zusammengesetzte/mehrteilige Fragen beantworten?",
     onlyFull: true,
     instruction:
-      "Teile beantworten wurde bei FCD häufiger berichtet; bei MCI auch möglich, aber oft nicht inkongruent.",
+      "Es findet sich häufig eine Inkonsistenz zwischen der erhaltenen Fähigkeit, die Einzelteile einer längeren und zusammengesetzten Frage beantworten zu können, und den Gedächtnisbeschwerden der Betroffenen. Das heißt, die Fähigkeit mehrteilige Fragen zu beantworten steht nicht im Einklang mit der Schwere der berichteten Symptome. Im Allgemeinen können Betroffene mit leichter kognitiver Beeinträchtigung (MCI) bei Neurodegeneration zwar in der Lage sein, solche Fragen zu beantworten (insbesondere wenn sie hochgebildet sind); dies sollte jedoch nicht isoliert betrachtet werden - in der Regel stimmt dies bei MCI Patientinnen und Patienten mit ihren milden Symptomen überein.",
   },
 ];
 
