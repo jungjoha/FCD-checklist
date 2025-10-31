@@ -6,8 +6,10 @@ const ITEMS = [
   { id: 1,
     label: "Besteht eine Diskrepanz zwischen dem Ausmaß der berichteten Symptome und der Alltagsfunktion?",
     onlyFull: false,
-    instruction:
-      "Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:•	der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben •	im Gespräch beobachtbaren adäquaten sprachlich-kommunikativen Fähigkeiten •	der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen.",
+    instruction: `Ein Nachweis interner Inkonsistenz liegt vor, wenn subjektiv berichtete erhebliche kognitive Schwierigkeiten und/oder niedrige neuropsychologische Testergebnisse in starkem Gegensatz stehen zu Beispielen wie:
+- der Fähigkeit, einen kognitiv anspruchsvollen Job ohne Schwierigkeiten auszuüben
+- im Gespräch beobachtbaren adäquaten sprachlich‑kommunikativen Fähigkeiten
+- der Fähigkeit, bestimmte Aktivitäten wie das Lesen eines Buches, das Verwalten von Finanzen und Autofahren ohne Schwierigkeiten auszuführen.`,
   },
   { id: 2,
     label: "Kann die Patientin oder der Patient detaillierte Beispiele für seine/ihre Gedächtnisbeschwerden nennen?",
@@ -18,58 +20,47 @@ const ITEMS = [
   { id: 3,
     label: "Sind die kognitiven Beschwerden ablenkbar und/oder fluktuierend (z.B. variabel in unterschiedlichen Situationen)?",
     onlyFull: true,
-    instruction:
-      "Bei Patientinnen oder Patienten mit funktioneller kognitiver Störung treten Schwierigkeiten häufig nur in bestimmten Situationen auf. Zum Beispiel können sie detailliert über Episoden von Gedächtnisverlust berichten und ihre Aufmerksamkeit während des Interviews aufrechterhalten, zeigen jedoch unverhältnismäßige Beeinträchtigungen derselben Funktionen in anderen Situationen (z. B. bei kognitiven Tests oder wenn die Aufmerksamkeit auf die Symptome gelenkt wird). Dies ist nicht dasselbe wie Fluktuationen im Zeitverlauf, die bei vielen anderen Erkrankungsprozessen beobachtet werden können (z. B. bei Delir oder Lewy-Körper-Demenz).
-",
+    instruction: `Bei Patientinnen oder Patienten mit funktioneller kognitiver Störung treten Schwierigkeiten häufig nur in bestimmten Situationen auf. Zum Beispiel können sie detailliert über Episoden von Gedächtnisverlust berichten und ihre Aufmerksamkeit während des Interviews aufrechterhalten, zeigen jedoch unverhältnismäßige Beeinträchtigungen derselben Funktionen in anderen Situationen (z. B. bei kognitiven Tests oder wenn die Aufmerksamkeit auf die Symptome gelenkt wird). Dies ist nicht dasselbe wie Fluktuationen im Zeitverlauf, die bei vielen anderen Erkrankungsprozessen beobachtet werden können (z. B. bei Delir oder Lewy‑Körper‑Demenz).`,
   },
   { id: 4,
     label: "Kann die Patientin oder der Patient die Liste der verordneten Medikamente nennen und/oder frühere Interaktionen mit anderen Ärzten erinnern (z.B. frühere Diagnosen und Untersuchungen)?",
     onlyFull: true,
-    instruction:
-      "Patientinnen und Patienten mit funktioneller kognitiver Störung sind häufig in der Lage, sich an frühere Interaktionen mit anderen Ärztinnen und Ärzten zu erinnern, einschließlich spezifischer Aspekte früherer Diagnosen und Untersuchungen. Ebenso deutet die Fähigkeit, eine Liste von Medikamenten aus dem Gedächtnis wiederzugeben und deren Indikationen zu benennen, auf ein gut funktionierendes Gedächtnis hin - was oftmals im Widerspruch zu den angegebenen Symptomen steht.",
+    instruction: `Patientinnen und Patienten mit funktioneller kognitiver Störung sind häufig in der Lage, sich an frühere Interaktionen mit anderen Ärztinnen und Ärzten zu erinnern, einschließlich spezifischer Aspekte früherer Diagnosen und Untersuchungen. Ebenso deutet die Fähigkeit, eine Liste von Medikamenten aus dem Gedächtnis wiederzugeben und deren Indikationen zu benennen, auf ein gut funktionierendes Gedächtnis hin - was oftmals im Widerspruch zu den angegebenen Symptomen steht.`,
   },
   { id: 5,
     label: "Gibt es eine Vorgeschichte einer nicht-kognitiven funktionellen neurologischen Störung und/oder funktionellen somatischen Störung (Schmerzen, Fatigue, …)?",
     onlyFull: false,
-    instruction:
-      "Das Vorliegen anderer Symptome wie chronische Schmerzen, Fatigue, Dissoziation oder das Vorliegen anderer funktioneller Diagnosen kann ein hilfreicher (aber nicht notwendiger) Hinweis auf eine funktionelle kognitive Störung sein.",
+    instruction: `Das Vorliegen anderer Symptome wie chronische Schmerzen, Fatigue, Dissoziation oder das Vorliegen anderer funktioneller Diagnosen kann ein hilfreicher (aber nicht notwendiger) Hinweis auf eine funktionelle kognitive Störung sein.`,
   },
   { id: 6,
     label: "Fallen dem Betroffenen die kognitiven Veränderung stärker auf als anderen (beachten Sie dafür auch z.B. selbst initiierte Überweisung und/oder alleinige Vorstellung)?",
     onlyFull: false,
-    instruction:
-      "Bei der funktionellen kognitiven Störung deutet die Fremdanamnese oft darauf hin, dass die Sorge von Betroffenen deutlich größer ist als die der Angehörigen. Unterstützende Hinweise zeigen sich darin, dass Patientinnen oder Patienten die Klinik allein aufsuchen und/oder die Überweisung selbst initiierte haben (d. h. Betroffene haben aufgrund ihrer Bedenken selbst die Initiative ergriffen, einen Arzt aufzusuchen).",
+    instruction: `Bei der funktionellen kognitiven Störung deutet die Fremdanamnese oft darauf hin, dass die Sorge von Betroffenen deutlich größer ist als die der Angehörigen. Unterstützende Hinweise zeigen sich darin, dass Patientinnen oder Patienten die Klinik allein aufsuchen und/oder die Überweisung selbst initiiert haben (d. h. Betroffene haben aufgrund ihrer Bedenken selbst die Initiative ergriffen, einen Arzt aufzusuchen).`,
   },
   { id: 7,
     label: "Ist die kognitive Leistung normal oder zeigt sie ein inkonsistentes Muster (z.B. schlechteres Ergebnis beim unmittelbaren Erinnern als beim verzögerten Abruf, bessere Leistung beim Rückwärtswiederholen von Ziffern als beim Vorwärtswiederholen, ungefähre Antworten)?",
     onlyFull: true,
-    instruction:
-      "Betroffene mit funktioneller kognitiver Störung können eine normale kognitive Leistung zeigen, im Vergleich zu neurodegenerativen Erkrankungen besser abschneiden oder auch unterdurchschnittliche Ergebnisse aufweisen. Wichtiger als eine „normale“ kognitive Leistung ist jedoch das Auftreten inkonsistenter Leistungsmuster, insbesondere im selben kognitiven Funktionsbereich (z. B. schlechtere Leistung bei der unmittelbaren Erinnerung im Vergleich zur verzögerten Erinnerung, bessere Leistung beim Rückwärtswiederholen von Ziffern im Vergleich zum Vorwärtswiederholen). Dies deutet darauf hin, dass kognitive Prozesse besser funktionieren, wenn sie automatisch abgerufen werden, als wenn sie explizit gefordert sind. Einige Betroffene zeigen möglicherweise auch eine geringe Ausdauer bei Aufgaben oder geben vage Antworten, die sich mit Ermutigung verbessern. Andere beeinflussende Faktoren, wie z.B. Schwankungen im Bewusstseinszustand, starke Kopfschmerzen oder andere akute neurologische oder psychiatrische Einflussfaktoren sollten ebenfalls berücksichtigt werden, da sie Aufmerksamkeitsdefizite erklären können.
-",
+    instruction: `Betroffene mit funktioneller kognitiver Störung können eine normale kognitive Leistung zeigen, im Vergleich zu neurodegenerativen Erkrankungen besser abschneiden oder auch unterdurchschnittliche Ergebnisse aufweisen. Wichtiger als eine „normale“ kognitive Leistung ist jedoch das Auftreten inkonsistenter Leistungsmuster, insbesondere im selben kognitiven Funktionsbereich (z. B. schlechtere Leistung bei der unmittelbaren Erinnerung im Vergleich zur verzögerten Erinnerung, bessere Leistung beim Rückwärtswiederholen von Ziffern im Vergleich zum Vorwärtswiederholen). Dies deutet darauf hin, dass kognitive Prozesse besser funktionieren, wenn sie automatisch abgerufen werden, als wenn sie explizit gefordert sind. Einige Betroffene zeigen möglicherweise auch eine geringe Ausdauer bei Aufgaben oder geben vage Antworten, die sich mit Ermutigung verbessern. Andere beeinflussende Faktoren, wie z. B. Schwankungen im Bewusstseinszustand, starke Kopfschmerzen oder andere akute neurologische oder psychiatrische Einflussfaktoren sollten ebenfalls berücksichtigt werden, da sie Aufmerksamkeitsdefizite erklären können.`,
   },
   { id: 8,
     label: "Sind die Gedächtnissymptome im Verlauf stabil oder haben sich gebessert?",
     onlyFull: false,
-    instruction:
-      "Patientinnen und Patienten mit funktioneller kognitiver Störung können plötzlich und schwerwiegend auftretende Symptome präsentieren, die über die Zeit stabil bleiben. In anderen Fällen haben Betroffene, die sich wegen Gedächtnisproblemen vorstellen, eine lange Dauer der Symptome, die sich über die Zeit nicht verschlechtert oder aber verbessert haben. Es ist zu beachten, dass auch bei vaskulärer kognitiver Beeinträchtigung oder nach einem Schädel-Hirn-Trauma (SHT) stabile Symptome oder eine Verbesserung im Laufe der Zeit vorliegen kann, insbesondere bei der Behandlung von Begleiterkrankungen.",
+    instruction: `Patientinnen und Patienten mit funktioneller kognitiver Störung können plötzlich und schwerwiegend auftretende Symptome präsentieren, die über die Zeit stabil bleiben. In anderen Fällen haben Betroffene, die sich wegen Gedächtnisproblemen vorstellen, eine lange Dauer der Symptome, die sich über die Zeit nicht verschlechtert oder aber verbessert haben. Es ist zu beachten, dass auch bei vaskulärer kognitiver Beeinträchtigung oder nach einem Schädel‑Hirn‑Trauma (SHT) stabile Symptome oder eine Verbesserung im Laufe der Zeit vorliegen kann, insbesondere bei der Behandlung von Begleiterkrankungen.`,
   },
   { id: 9,
-    label: "Kann die Patientin oder der Patien den Beginn der Symptome präzise datieren (abrupter Beginn)?",
+    label: "Kann die Patientin oder der Patient den Beginn der Symptome präzise datieren (abrupter Beginn)?",
     onlyFull: false,
-    instruction:
-      "Einige Patientinnen und Patienten können den Beginn der Symptome präzise beschreiben und datieren. Dabei werden häufig Zusammenhänge zu vorangegangenen spezifischen Ereignissen geschildert, beispielsweise eine Migräneattacke, ein Dissoziationserleben, ein leichtes Schädel-Hirn-Trauma oder eine Virus-Infektion. Diese Information sollte von Betroffenen selbst und nicht von den Angehörigen hervorgebracht werden.",
+    instruction: `Einige Patientinnen und Patienten können den Beginn der Symptome präzise beschreiben und datieren. Dabei werden häufig Zusammenhänge zu vorangegangenen spezifischen Ereignissen geschildert, beispielsweise eine Migräneattacke, ein Dissoziationserleben, ein leichtes Schädel‑Hirn‑Trauma oder eine Virus‑Infektion. Diese Information sollte von Betroffenen selbst und nicht von den Angehörigen hervorgebracht werden.`,
   },
   { id: 10,
-    label: "Psychologische Stressfaktoren können als prädisponierende, auslösende oder aufrechterhaltende Faktoren bei einer funktionellen kognitiven Störung wirken. Bei einem Teil der Betroffenen ist die funktionelle kognitive Störung mit depressiven Symptomen, Angstzuständen und anderen stressbezogenen Lebensereignissen verbunden. Bei einigen Betroffenen können Gedächtnissymptome mit bedeutenden Lebensereignissen wie einem kürzlichen Trauerfall oder einer körperlichen Erkrankung in Verbindung stehen. ",
+    label: "Gibt es einen offensichtlichen psychologischen Stressor?",
     onlyFull: false,
-    instruction:
-      "Stressoren können prädisponierend, auslösend oder aufrechterhaltend sein; nie isoliert interpretieren.",
+    instruction: `SPsychologische Stressfaktoren können als prädisponierende, auslösende oder aufrechterhaltende Faktoren bei einer funktionellen kognitiven Störung wirken. Bei einem Teil der Betroffenen ist die funktionelle kognitive Störung mit depressiven Symptomen, Angstzuständen und anderen stressbezogenen Lebensereignissen verbunden. Bei einigen Betroffenen können Gedächtnissymptome mit bedeutenden Lebensereignissen wie einem kürzlichen Trauerfall oder einer körperlichen Erkrankung in Verbindung stehen. `,
   },
   { id: 11,
     label: "Kann die Patientin oder der Patient zusammengesetzte/mehrteilige Fragen beantworten?",
     onlyFull: true,
-    instruction:
-      "Es findet sich häufig eine Inkonsistenz zwischen der erhaltenen Fähigkeit, die Einzelteile einer längeren und zusammengesetzten Frage beantworten zu können, und den Gedächtnisbeschwerden der Betroffenen. Das heißt, die Fähigkeit mehrteilige Fragen zu beantworten steht nicht im Einklang mit der Schwere der berichteten Symptome. Im Allgemeinen können Betroffene mit leichter kognitiver Beeinträchtigung (MCI) bei Neurodegeneration zwar in der Lage sein, solche Fragen zu beantworten (insbesondere wenn sie hochgebildet sind); dies sollte jedoch nicht isoliert betrachtet werden - in der Regel stimmt dies bei MCI Patientinnen und Patienten mit ihren milden Symptomen überein.",
+    instruction: `Es findet sich häufig eine Inkonsistenz zwischen der erhaltenen Fähigkeit, die Einzelteile einer längeren und zusammengesetzten Frage beantworten zu können, und den Gedächtnisbeschwerden der Betroffenen. Das heißt, die Fähigkeit mehrteilige Fragen zu beantworten steht nicht im Einklang mit der Schwere der berichteten Symptome. Im Allgemeinen können Betroffene mit leichter kognitiver Beeinträchtigung (MCI) bei Neurodegeneration zwar in der Lage sein, solche Fragen zu beantworten (insbesondere wenn sie hochgebildet sind); dies sollte jedoch nicht isoliert betrachtet werden - in der Regel stimmt dies bei MCI Patientinnen und Patienten mit ihren milden Symptomen überein.`,
   },
 ];
 
@@ -166,16 +157,7 @@ useEffect(() => {
     [selections, visibleItems]
   );
 
-  const answeredCount = useMemo(
-    () =>
-      Object.entries(selections)
-        .filter(([id, val]) => visibleItems.some((v) => v.id === Number(id)) && val !== -1)
-        .length,
-    [selections, visibleItems]
-  );
-
   const maxScore = visibleItems.length;
-  const progressPct = maxScore ? Math.round((answeredCount / maxScore) * 100) : 0;
 
   // Cutoff/probability visualization helpers
   const cutoff = isFull ? 6 : 4;
@@ -391,9 +373,7 @@ useEffect(() => {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white/80 backdrop-blur">
         <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-4 text-xs text-slate-600 sm:text-[13px]">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           
-          </div>
 
           {/* Hinweise */}
           <div className="leading-relaxed">
