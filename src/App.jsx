@@ -55,7 +55,7 @@ const ITEMS = [
   { id: 10,
     label: "Gibt es einen offensichtlichen psychologischen Stressor?",
     onlyFull: false,
-    instruction: `SPsychologische Stressfaktoren können als prädisponierende, auslösende oder aufrechterhaltende Faktoren bei einer funktionellen kognitiven Störung wirken. Bei einem Teil der Betroffenen ist die funktionelle kognitive Störung mit depressiven Symptomen, Angstzuständen und anderen stressbezogenen Lebensereignissen verbunden. Bei einigen Betroffenen können Gedächtnissymptome mit bedeutenden Lebensereignissen wie einem kürzlichen Trauerfall oder einer körperlichen Erkrankung in Verbindung stehen. `,
+    instruction: `Psychologische Stressfaktoren können als prädisponierende, auslösende oder aufrechterhaltende Faktoren bei einer funktionellen kognitiven Störung wirken. Bei einem Teil der Betroffenen ist die funktionelle kognitive Störung mit depressiven Symptomen, Angstzuständen und anderen stressbezogenen Lebensereignissen verbunden. Bei einigen Betroffenen können Gedächtnissymptome mit bedeutenden Lebensereignissen wie einem kürzlichen Trauerfall oder einer körperlichen Erkrankung in Verbindung stehen. `,
   },
   { id: 11,
     label: "Kann die Patientin oder der Patient zusammengesetzte/mehrteilige Fragen beantworten?",
