@@ -1,7 +1,7 @@
 # FCD – Diagnostische Orientierungshilfe  
 Interaktive WebApp zur Unterstützung der klinischen Einschätzung funktioneller kognitiver Störungen (FCD)
 
-[Live-Version auf Vercel](https://fcd-diagnose-tool.vercel.app)
+[Live-Version auf Vercel](https://fks-checkliste.vercel.app)
 
 ---
 
@@ -47,11 +47,6 @@ Die WebApp zeigt dynamisch:
 - „Ja“ → 1 Punkt  
 - „Nein / nicht getestet“ → 0 Punkte  
 - Live-Gesamtscore & maximal mögliche Punkte  
-
-### ✔️ Instruktionsfeld  
-- Kontextsensitiv  
-- Mobil: unterhalb des Items  
-- Desktop: rechts neben dem Item  
 
 ### ✔️ Probability-Indicator  
 Basierend auf publizierten Cut-offs:  
