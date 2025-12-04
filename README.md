@@ -1,23 +1,21 @@
-# FCD Checklist – Deployment Guide
+## 🛠️ Lizenz
 
-This project is built with **React (Vite)** and styled using **Tailwind CSS v4**.  
-It is deployed automatically to **Vercel** via GitHub.
+Der Code dieses Projekts ist **Open Source** und wird unter der Lizenz  
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**  
+bereitgestellt.
 
----
+Dies bedeutet:
 
-## Workflow: Änderungen online bringen
+- ✔️ **Namensnennung erforderlich**  
+- ❌ **Keine kommerzielle Nutzung erlaubt**  
+- ✔️ Bearbeitungen, Remixe und Weitergaben sind erlaubt,  
+  **solange sie nicht kommerziell sind** und die ursprünglichen Autor:innen genannt werden.
 
-### 1. Lokal entwickeln
-# Dev-Server starten:
-# bash 
-  npm run dev
-  git add .
+Vollständiger Lizenztext:  
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
 
-# Änderungen in VScode anbringen
+**Empfohlene Zitierweise:**
 
-### 2. Änderungen sichern
-git add .
-git commit -m "kurze Beschreibung der Änderung"
-
-### 3. Änderungen online stellen 
-git push
+J. Jungilligens, J. Beckers & S. Popkirov (2025).  
+*FCD – Diagnostische Orientierungshilfe (WebApp).*  
+GitHub Repository: https://github.com/jungjoha/FCD-checklist
