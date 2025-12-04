@@ -1,3 +1,4 @@
+// Testedit: Oboe tool successfully connected.
 import React, { useEffect, useMemo, useState } from "react";
 
 
@@ -373,9 +374,6 @@ useEffect(() => {
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white/80 backdrop-blur">
         <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-4 text-xs text-slate-600 sm:text-[13px]">
-          
-
-          {/* Hinweise */}
           <div className="leading-relaxed">
             <p>
               Diese Checkliste basiert auf Cabreira&nbsp;et&nbsp;al., <em>BMJ Neurology Open</em> (2025).{" "}
@@ -388,32 +386,40 @@ useEffect(() => {
                 https://doi.org/10.1136/bmjno-2024-000918
               </a>
             </p>
+
             <p className="mt-1">
-              WebApp entwickelt von J.&nbsp;Jungilligens (Klinik für Neurologie, Knappschaft Kliniken
-              Universitätsklinikum Bochum), J.&nbsp;Beckers (Klinik für Neurologie, Knappschaft Kliniken
-              Universitätsklinikum Bochum) und S.&nbsp;Popkirov (Klinik für Neurologie, Universitätsklinikum Essen).
+              WebApp entwickelt von J.&nbsp;Jungilligens und J.&nbsp;Beckers (Klinik für Neurologie,
+              Knappschaft Kliniken Universitätsklinikum Bochum) sowie S.&nbsp;Popkirov
+              (Klinik für Neurologie, Universitätsklinikum Essen).
             </p>
-            <p className="mt-1">
-              <strong>Datenschutz:</strong> Diese WebApp speichert, verarbeitet oder überträgt keinerlei personenbezogene Daten. 
-              Alle Eingaben verbleiben ausschließlich im Browser der Nutzerinnen und Nutzer und werden nicht an Server oder Dritte übermittelt.
+
+            <p className="mt-3">
+              <strong>Datenschutz:</strong> Diese WebApp verarbeitet keinerlei personenbezogene Daten.
+              Alle Eingaben werden ausschließlich lokal im Browser gespeichert und nicht an Server
+              oder Dritte übertragen. Es erfolgt kein Tracking, keine Identifikation und keine
+              Protokollierung.
             </p>
-            <p className="mt-1">
-              <strong>Haftungsausschluss:</strong> Diese WebApp richtet sich ausschließlich an Angehörige der Gesundheitsberufe und dient als ergänzende Orientierungshilfe. 
-              Sie ersetzt <em>keine</em> ärztliche Anamnese, Untersuchung, Diagnostik oder Therapieentscheidung. 
-              Die hier dargestellten Cut-offs und Wahrscheinlichkeiten beruhen auf Pilotdaten (Cabreira&nbsp;et&nbsp;al., 2025) und bedürfen prospektiver Validierung; 
-              eine Gewähr für Vollständigkeit, Richtigkeit und Aktualität wird nicht übernommen. 
-              Die Verantwortung für die Beurteilung des Einzelfalls liegt bei der behandelnden Ärztin/dem behandelnden Arzt. 
-              Eine Haftung der Autorinnen/Autoren und Betreiber für Schäden, die aus der Nutzung oder dem Vertrauen auf die bereitgestellten Informationen entstehen, ist – außer bei Vorsatz und grober Fahrlässigkeit – ausgeschlossen.
+
+            <p className="mt-3">
+              <strong>Haftungsausschluss:</strong> Diese WebApp richtet sich ausschließlich an
+              Angehörige der Gesundheitsberufe und dient als ergänzende, nicht validierte
+              Orientierungshilfe. Sie ersetzt keine ärztliche Untersuchung, Diagnostik,
+              klinische Bewertung oder Therapieentscheidung. Die dargestellten Cut-offs beruhen auf
+              Pilotdaten und können eine klinische Beurteilung nicht ersetzen. Die Verantwortung für
+              Diagnostik und Therapie liegt vollständig bei den behandelnden Ärztinnen und Ärzten.
+              Eine Haftung der Autorinnen/Autoren oder Bereitstellenden für Schäden, die aus der Nutzung
+              oder dem Vertrauen auf die bereitgestellten Informationen entstehen, ist – außer bei
+              Vorsatz oder grober Fahrlässigkeit – ausgeschlossen.
             </p>
-            <p className="mt-1">
+
+            <p className="mt-2">
               <button
                 type="button"
                 onClick={() => setShowLegal(true)}
                 className="underline decoration-slate-400 hover:decoration-slate-600"
               >
-                Impressum 
+                Impressum
               </button>
-              
             </p>
           </div>
         </div>
@@ -455,8 +461,14 @@ useEffect(() => {
                   Klinik für Neurologie, Knappschaft Kliniken Universitätsklinikum Bochum<br/>
                   In der Schornau 23–25, 44892 Bochum
                 </p>
+                <p className="mt-2">
+                  Kontakt: <a href="mailto:neuropsychologie.bochum@knappschaft-kliniken.de"
+                    className="underline decoration-slate-400 hover:decoration-slate-600">
+                    neuropsychologie.bochum@knappschaft-kliniken.de
+                  </a>
+                </p>
                 <p className="mt-2 text-slate-600">
-                  Hinweis: Diese WebApp ist <strong>kein offizielles Projekt</strong> der Klinik.
+                  Hinweis: Diese WebApp ist <strong>kein offizielles Projekt</strong> der Klinik, sondern wurde im Rahmen eines wissenschaftlichen Entwicklungs- und Informationsangebots erstellt.
                 </p>
               </section>
 
